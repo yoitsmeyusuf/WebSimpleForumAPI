@@ -1,18 +1,17 @@
-using Takasbu.Models;
-using Takasbu.Models.DTO;
-using Microsoft.AspNetCore.Http;
-using Takasbu.Services;
+using ForumApi.Models;
+using ForumApi.Models.DTO;
+using ForumApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Authorization;
+using SendWithMailgun;
 using System.Text.RegularExpressions;
 
+
+
+
 //TODO services eklicez UNUTMA YUSUF
-namespace Takasbu.Controllers
+namespace ForumApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,9 +19,10 @@ namespace Takasbu.Controllers
     {
         private readonly AuthService _AuthService;
         private readonly UsersService _UsersService;
-
+        private readonly MailServices _MailServices;
+      
         private readonly SubjectService _SubjectService;
-
+     
         public static User user = new User();
         public static Subject subject = new Subject();
         public static Comment comment = new Comment();
@@ -33,13 +33,15 @@ namespace Takasbu.Controllers
             UsersService UsersService,
             AuthService AuthService,
             SubjectService SubjectService,
-            CommentService CommentService
+            CommentService CommentService,
+            MailServices mailServices
         )
         {
             _SubjectService = SubjectService;
             _AuthService = AuthService;
             _CommentService = CommentService;
             _UsersService = UsersService;
+            _MailServices = mailServices;
         }
 
         public async Task<List<User>> Get() => await _UsersService.GetAsync();
@@ -78,15 +80,46 @@ namespace Takasbu.Controllers
             return BadRequest("There is a same Username with a user");
         }
 
+        [HttpPost("GetMail")]
+        [AllowAnonymous]
+        public async Task<ActionResult<string>> GetMail(UserDto request){
+           var users = await _UsersService.GetAsync(request.Username,true);
+           if(users == null){
+             return BadRequest("User not Found");
+           }
+         
+           
+           Random rnd = new Random();
+           int Random = rnd.Next(1000, 9999);
+          var result = await _MailServices.SendSimpleMessage($"<h1>{Random}</h1>", user.Username);
+            Console.WriteLine(result.ErrorMessage);
+             Console.WriteLine(result.StatusDescription);
+              Console.WriteLine(result.Content);
+              Console.WriteLine(result);
+            users.mailpass = Random.ToString();
+           await _UsersService.UpdateAsync(users.Id,users);
+         
+         
+           return Ok("mail gonderildi");
+         }
+
+ 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> LoginAsync(UserDto request)
+        public async Task<ActionResult<string>> LoginAsync(UserDto request,string mail)
         {
             var users = await _UsersService.GetAsync();
-
+            
             var user = users.FirstOrDefault(u => u.Username == request.Username);
+           
             if (user == null)
                 return BadRequest("User not Found");
+
+            if (user.mailpass==mail|| user.mailpass==" ")
+            {
+                return BadRequest("Email yanlis yada Email Alinmamis");
+            }
+
 
             if (
                 !_AuthService.VerifyPasswordHash(
@@ -372,3 +405,4 @@ namespace Takasbu.Controllers
         }
     }
 }
+

@@ -1,5 +1,5 @@
 
-namespace Takasbu.Models.DTO
+namespace ForumApi.Models.DTO
 {
 public class SubjectDTO
 {

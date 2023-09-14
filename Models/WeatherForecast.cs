@@ -1,4 +1,4 @@
-namespace Takasbu.Models;
+namespace ForumApi.Models;
 
 public class WeatherForecast
 {

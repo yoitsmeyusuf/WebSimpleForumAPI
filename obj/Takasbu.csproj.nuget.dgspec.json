@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\Takasbu.csproj": {}
+    "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\ForumApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\Takasbu.csproj": {
+    "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\ForumApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\Takasbu.csproj",
-        "projectName": "Takasbu",
-        "projectPath": "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\Takasbu.csproj",
+        "projectUniqueName": "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\ForumApi.csproj",
+        "projectName": "ForumApi",
+        "projectPath": "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\ForumApi.csproj",
         "packagesPath": "C:\\Users\\win10\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\win10\\Desktop\\ForumUygulaması\\Backend\\obj\\",
         "projectStyle": "PackageReference",

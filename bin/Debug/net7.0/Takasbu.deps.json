@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "Takasbu/1.0.0": {
+      "ForumApi/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.10",
           "Microsoft.AspNetCore.OpenApi": "7.0.4",
@@ -16,7 +16,7 @@
           "System.IdentityModel.Tokens.Jwt": "6.31.0"
         },
         "runtime": {
-          "Takasbu.dll": {}
+          "ForumApi.dll": {}
         }
       },
       "AWSSDK.Core/3.7.100.14": {
@@ -344,7 +344,7 @@
     }
   },
   "libraries": {
-    "Takasbu/1.0.0": {
+    "ForumApi/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

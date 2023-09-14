@@ -1,8 +1,9 @@
+using Amazon.SecurityToken.Model;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
-namespace Takasbu.Models
+namespace ForumApi.Models
 {
     public class User
     {
@@ -31,6 +32,8 @@ namespace Takasbu.Models
 
         [BsonElement("notifcomids")]
         public List<string> notifcomids { get; set; }
+
+        public string mailpass {get; set;} = "";
 
         public User()
         {

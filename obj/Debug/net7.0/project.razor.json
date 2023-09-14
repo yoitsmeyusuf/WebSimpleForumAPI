@@ -1,6 +1,6 @@
 {
-  "SerializedFilePath": "c:\\Users\\win10\\Desktop\\Takasbuback\\Takasbu\\obj\\Debug\\net7.0\\project.razor.json",
-  "FilePath": "c:\\Users\\win10\\Desktop\\Takasbuback\\Takasbu\\Takasbu.csproj",
+  "SerializedFilePath": "c:\\Users\\win10\\Desktop\\Takasbuback\\ForumApi\\obj\\Debug\\net7.0\\project.razor.json",
+  "FilePath": "c:\\Users\\win10\\Desktop\\Takasbuback\\ForumApi\\ForumApi.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "7.0",
@@ -18642,7 +18642,7 @@
     ],
     "CSharpLanguageVersion": 1100
   },
-  "RootNamespace": "Takasbu",
+  "RootNamespace": "ForumApi",
   "Documents": [],
   "SerializationFormat": "0.3"
 }

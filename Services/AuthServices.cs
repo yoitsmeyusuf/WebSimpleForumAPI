@@ -1,7 +1,7 @@
-using Takasbu.Models;
-using Takasbu.Models.DTO;
+using ForumApi.Models;
+using ForumApi.Models.DTO;
 using Microsoft.AspNetCore.Http;
-using Takasbu.Services;
+using ForumApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Takasbu.Services;
+namespace ForumApi.Services;
 
 public class AuthService
 {

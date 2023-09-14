@@ -1,9 +1,9 @@
-using Takasbu.Models;
-using Takasbu.Services;
+using ForumApi.Models;
+using ForumApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Takasbu.Controllers;
+namespace ForumApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

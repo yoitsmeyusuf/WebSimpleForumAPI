@@ -1,10 +1,10 @@
 // <snippet_File>
-using Takasbu.Models;
+using ForumApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System.Text.RegularExpressions;
 
-namespace Takasbu.Services;
+namespace ForumApi.Services;
 
 public class CommentService
 {

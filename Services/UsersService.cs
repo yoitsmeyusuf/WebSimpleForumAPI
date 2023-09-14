@@ -1,9 +1,9 @@
 ﻿// <snippet_File>
-using Takasbu.Models;
+using ForumApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace Takasbu.Services;
+namespace ForumApi.Services;
 
 public class UsersService
 {

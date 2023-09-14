@@ -1,11 +1,11 @@
 // <snippet_File>
-using Takasbu.Models;
+using ForumApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 using MongoDB.Bson;
 
-namespace Takasbu.Services;
+namespace ForumApi.Services;
 
 public class SubjectService
 {

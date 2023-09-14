@@ -1,5 +1,5 @@
 // <snippet_File>
-namespace Takasbu.Services
+namespace ForumApi.Services
 {
     public class CommentDatabaseSettings
     {

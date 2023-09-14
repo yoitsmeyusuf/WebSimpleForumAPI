@@ -1,5 +1,5 @@
-using Takasbu.Models;
-using Takasbu.Services;
+using ForumApi.Models;
+using ForumApi.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +34,7 @@ builder.Services.Configure<CommentDatabaseSettings>(
 
 // builder.Services.AddScoped<TokenAuthenticationMiddleware>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<MailServices>();
 builder.Services.AddSingleton<UsersService>();
 builder.Services.AddSingleton<SubjectService>();
 builder.Services.AddSingleton<CommentService>();
