@@ -1,31 +1,57 @@
 using System;
+using System.Net;
+using System.Net.Mail;
+using ForumApi.Models;
+using Microsoft.Extensions.Options;
 using RestSharp;
 using RestSharp.Authenticators;
 
 namespace ForumApi.Services
 {
     public class MailServices
-    {
-        private static string apikey = "NOOOO key for uuu";
-        private static string maaail = "Nooooo";
+    { 
+          string smtpServer;
+           string port;
+           string senderEmail;
+           string password;
+        public MailServices(IOptions<EmailStorage> EmailStorage){
+         smtpServer = EmailStorage.Value.SmtpServer;
+         port = EmailStorage.Value.Port;
+         senderEmail = EmailStorage.Value.SenderEmail;
+         password   = EmailStorage.Value.Pass;
+            
+        }
+  
 
-        public async Task<RestResponse> SendSimpleMessage(string messages, string mail)
-        {
-            RestClient client = new RestClient("https://api.mailgun.net/v3");
+        public bool SendSimpleMessage(string recipientEmail,string Random)
+        { 
+           
+            
+            try
+            {
+                MailMessage mail = new MailMessage
+                {
+                    From = new MailAddress(senderEmail)
+                };
+                mail.To.Add(new MailAddress(recipientEmail));
+                mail.Subject = "Email Authentication"; //E-posta konusu
+                mail.Body = $"{Random}";
+                 //E-posta içeriği
+              
+                SmtpClient smtpClient = new SmtpClient(smtpServer,int.Parse(port));
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(senderEmail, password);
+                smtpClient.EnableSsl = true;
 
-            client.Authenticator = new HttpBasicAuthenticator("api", apikey);
-
-            RestRequest request = new RestRequest();
-            request.AddParameter("domain", maaail, ParameterType.UrlSegment);
-            request.Resource = "{domain}/messages";
-            request.AddParameter("from", $"Excited User <mailgun@{maaail}>");
-            request.AddParameter("to", mail);
-            request.AddParameter("to", $"YOU@{maaail}");
-            request.AddParameter("subject", "Hello");
-            request.AddParameter("text", $"{messages}");
-            request.Method = Method.Post;
-
-            return await client.ExecuteAsync(request);
+                smtpClient.Send(mail);
+                Console.WriteLine("E-posta gönderildi.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("E-posta gönderirken bir hata oluştu: " + ex.Message);
+                return false;
+            }
         }
     }
 }

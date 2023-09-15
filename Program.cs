@@ -31,6 +31,9 @@ builder.Services.Configure<SubjectStoreDatabaseSettings>(
 builder.Services.Configure<CommentDatabaseSettings>(
     builder.Configuration.GetSection("CommentDatabaseSettings")
 );
+builder.Services.Configure<EmailStorage>(
+    builder.Configuration.GetSection("EmailStorage")
+);
 
 // builder.Services.AddScoped<TokenAuthenticationMiddleware>();
 builder.Services.AddScoped<AuthService>();

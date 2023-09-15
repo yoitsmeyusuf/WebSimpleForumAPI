@@ -91,11 +91,7 @@ namespace ForumApi.Controllers
            
            Random rnd = new Random();
            int Random = rnd.Next(1000, 9999);
-          var result = await _MailServices.SendSimpleMessage($"<h1>{Random}</h1>", user.Username);
-            Console.WriteLine(result.ErrorMessage);
-             Console.WriteLine(result.StatusDescription);
-              Console.WriteLine(result.Content);
-              Console.WriteLine(result);
+           _MailServices.SendSimpleMessage(users.Username,Random.ToString());
             users.mailpass = Random.ToString();
            await _UsersService.UpdateAsync(users.Id,users);
          
