@@ -33,7 +33,11 @@ namespace ForumApi.Models
         [BsonElement("notifcomids")]
         public List<string> notifcomids { get; set; }
 
+        [BsonElement("mailpass")]
         public string mailpass {get; set;} = "";
+   
+        [BsonElement("verified")]
+        public bool verified {get; set;} = false;
 
         public User()
         {

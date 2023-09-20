@@ -37,6 +37,7 @@ builder.Services.Configure<EmailStorage>(
 
 // builder.Services.AddScoped<TokenAuthenticationMiddleware>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<BackgroundService>();
 builder.Services.AddScoped<MailServices>();
 builder.Services.AddSingleton<UsersService>();
 builder.Services.AddSingleton<SubjectService>();

@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using SendWithMailgun;
 using System.Text.RegularExpressions;
 
-
-
-
 //TODO services eklicez UNUTMA YUSUF
 namespace ForumApi.Controllers
 {
@@ -20,9 +17,9 @@ namespace ForumApi.Controllers
         private readonly AuthService _AuthService;
         private readonly UsersService _UsersService;
         private readonly MailServices _MailServices;
-      
+
         private readonly SubjectService _SubjectService;
-     
+
         public static User user = new User();
         public static Subject subject = new Subject();
         public static Comment comment = new Comment();
@@ -82,40 +79,41 @@ namespace ForumApi.Controllers
 
         [HttpPost("GetMail")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> GetMail(UserDto request){
-           var users = await _UsersService.GetAsync(request.Username,true);
-           if(users == null){
-             return BadRequest("User not Found");
-           }
-         
-           
-           Random rnd = new Random();
-           int Random = rnd.Next(1000, 9999);
-           _MailServices.SendSimpleMessage(users.Username,Random.ToString());
-            users.mailpass = Random.ToString();
-           await _UsersService.UpdateAsync(users.Id,users);
-         
-         
-           return Ok("mail gonderildi");
-         }
+        public async Task<ActionResult<string>> GetMail(UserDto request)
+        {
+            var users = await _UsersService.GetAsync(request.Username, true);
+            if (users == null)
+            {
+                return BadRequest("User not Found");
+            }
 
- 
+            Random rnd = new Random();
+            int Random = rnd.Next(1000, 9999);
+            _MailServices.SendSimpleMessage(users.Username, Random.ToString());
+            users.mailpass = Random.ToString();
+            await _UsersService.UpdateAsync(users.Id, users);
+
+            return Ok("mail gonderildi");
+        }
+
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> LoginAsync(UserDto request,string mail)
+        public async Task<ActionResult<string>> LoginAsync(UserDto request, string mail)
         {
             var users = await _UsersService.GetAsync();
-            
+
             var user = users.FirstOrDefault(u => u.Username == request.Username);
-           
+
             if (user == null)
                 return BadRequest("User not Found");
 
-            if (user.mailpass==mail|| user.mailpass==" ")
+            if (user.mailpass != mail || user.mailpass == " ")
             {
-                return BadRequest("Email yanlis yada Email Alinmamis");
+                return BadRequest("Yanlış yada Mail (Tekrar) alınmamis");
             }
-
+            user.mailpass = " ";
+            user.verified = true;
+            await _UsersService.UpdateAsync(user.Id, user);
 
             if (
                 !_AuthService.VerifyPasswordHash(
@@ -147,6 +145,7 @@ namespace ForumApi.Controllers
             }
             return BadRequest();
         }
+
 
         [HttpDelete("DeleteSubject")]
         [Authorize(Roles = "User")]
@@ -401,4 +400,3 @@ namespace ForumApi.Controllers
         }
     }
 }
-

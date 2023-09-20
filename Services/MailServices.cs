@@ -1,10 +1,9 @@
-using System;
+
 using System.Net;
 using System.Net.Mail;
 using ForumApi.Models;
 using Microsoft.Extensions.Options;
-using RestSharp;
-using RestSharp.Authenticators;
+
 
 namespace ForumApi.Services
 {
