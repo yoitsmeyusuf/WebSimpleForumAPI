@@ -6,6 +6,18 @@ public class BackgroundServices : BackgroundService
     private readonly UsersService _usersService;
     private readonly MailServices _mailServices;
 
+  /*How to solve this
+  Unhandled exception. System.ArgumentException: Cannot instantiate implementation type 'Microsoft.Extensions.Hosting.BackgroundService' for service type 'Microsoft.Extensions.Hosting.BackgroundService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.Populate()
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\win10\Desktop\ForumUygulaması\Backend\Program.cs:line 53 
+   solve
+    */
+
+
     public BackgroundServices(ILogger<BackgroundServices> logger, UsersService usersService, MailServices mailServices)
     {
         _mailServices = mailServices;

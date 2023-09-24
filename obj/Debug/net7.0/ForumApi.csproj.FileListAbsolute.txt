@@ -57,3 +57,5 @@ C:\Users\win10\Desktop\ForumUygulaması\Backend\bin\Debug\net7.0\Newtonsoft.Json
 C:\Users\win10\Desktop\ForumUygulaması\Backend\bin\Debug\net7.0\RestWrapper.dll
 C:\Users\win10\Desktop\ForumUygulaması\Backend\bin\Debug\net7.0\SendWithMailgun.dll
 C:\Users\win10\Desktop\ForumUygulaması\Backend\bin\Debug\net7.0\RestSharp.dll
+C:\Users\win10\Desktop\ForumUygulaması\Backend\obj\Debug\net7.0\ForumApi.RazorAssemblyInfo.cache
+C:\Users\win10\Desktop\ForumUygulaması\Backend\obj\Debug\net7.0\ForumApi.RazorAssemblyInfo.cs

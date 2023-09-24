@@ -1,0 +1,46 @@
+@model ForumApi.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+
+    @using (Html.BeginForm("Registration", "Auth", FormMethod.Post))
+    {
+        <div>
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" required>
+        </div>
+        <div>
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" required>
+        </div>
+        <button type="submit">Register</button>
+    }
+   <h1>Login</h1>
+     @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+        <div>
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" required>
+        </div>
+        <div>
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" required>
+        </div>
+                <div>
+            <label for="Emailpass">Password:</label>
+            <input type="text" id="mail" name="mail" required>
+        </div>
+        <button type="submit">Login</button>
+    }
+
+</body>
+</html>

@@ -37,8 +37,10 @@ builder.Services.Configure<EmailStorage>(
 
 // builder.Services.AddScoped<TokenAuthenticationMiddleware>();
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<BackgroundService>();
+builder.Services.AddScoped<BackgroundServices>();
 builder.Services.AddScoped<MailServices>();
+builder.Services.AddSingleton<BackgroundServices>();
+builder.Services.AddSingleton<MailServices>();
 builder.Services.AddSingleton<UsersService>();
 builder.Services.AddSingleton<SubjectService>();
 builder.Services.AddSingleton<CommentService>();
@@ -49,7 +51,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
+builder.Services.AddControllersWithViews();
+
+
 var app = builder.Build();
+
+
+app.UseRouting();
+  app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+    });
 
 // app.UseMiddleware<TokenAuthenticationMiddleware>();
 
@@ -57,6 +71,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+
 
 app.MapControllers();
 

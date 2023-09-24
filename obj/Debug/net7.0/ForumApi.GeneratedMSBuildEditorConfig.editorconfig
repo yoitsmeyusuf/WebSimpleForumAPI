@@ -9,9 +9,13 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ForumApi
 build_property.RootNamespace = ForumApi
-build_property.ProjectDir = c:\Users\win10\Desktop\ForumUygulaması\Backend\
+build_property.ProjectDir = C:\Users\win10\Desktop\ForumUygulaması\Backend\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\win10\Desktop\ForumUygulaması\Backend
+build_property.MSBuildProjectDirectory = C:\Users\win10\Desktop\ForumUygulaması\Backend
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/win10/Desktop/ForumUygulaması/Backend/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

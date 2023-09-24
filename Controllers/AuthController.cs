@@ -4,7 +4,7 @@ using ForumApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Authorization;
-using SendWithMailgun;
+
 using System.Text.RegularExpressions;
 
 //TODO services eklicez UNUTMA YUSUF
@@ -12,7 +12,7 @@ namespace ForumApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : Controller
     {
         private readonly AuthService _AuthService;
         private readonly UsersService _UsersService;
@@ -43,9 +43,15 @@ namespace ForumApi.Controllers
 
         public async Task<List<User>> Get() => await _UsersService.GetAsync();
 
-        [HttpPost("register")]
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost("Registration")]
         [AllowAnonymous]
-        public async Task<ActionResult<User>> Registration(UserDto request)
+        public async Task<ActionResult<User>> Registration([FromForm]UserDto request)
         {
             user.Id = string.Empty;
             if (
@@ -71,34 +77,22 @@ namespace ForumApi.Controllers
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
                 await _UsersService.CreateAsync(user);
+
+                Random rnd = new Random();
+                int Random = rnd.Next(1000, 9999);
+                _MailServices.SendSimpleMessage(user.Username, Random.ToString());
+                user.mailpass = Random.ToString();
+                await _UsersService.UpdateAsync(user.Id, user);
+
                 return Ok(user);
             }
 
             return BadRequest("There is a same Username with a user");
         }
 
-        [HttpPost("GetMail")]
-        [AllowAnonymous]
-        public async Task<ActionResult<string>> GetMail(UserDto request)
-        {
-            var users = await _UsersService.GetAsync(request.Username, true);
-            if (users == null)
-            {
-                return BadRequest("User not Found");
-            }
-
-            Random rnd = new Random();
-            int Random = rnd.Next(1000, 9999);
-            _MailServices.SendSimpleMessage(users.Username, Random.ToString());
-            users.mailpass = Random.ToString();
-            await _UsersService.UpdateAsync(users.Id, users);
-
-            return Ok("mail gonderildi");
-        }
-
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> LoginAsync(UserDto request, string mail)
+        public async Task<ActionResult<string>> LoginAsync([FromForm]UserDto request,[FromForm] string mail)
         {
             var users = await _UsersService.GetAsync();
 
@@ -145,7 +139,6 @@ namespace ForumApi.Controllers
             }
             return BadRequest();
         }
-
 
         [HttpDelete("DeleteSubject")]
         [Authorize(Roles = "User")]
